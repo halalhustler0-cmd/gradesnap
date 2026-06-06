@@ -40,15 +40,15 @@ class _GradeSnapAppState extends State<GradeSnapApp> {
     return MaterialApp(
       title: 'GradeSnap',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true, colorScheme: ColorScheme.dark()),
+      theme: ThemeData(useMaterial3: true, colorScheme: const ColorScheme.dark()),
       home: widget.userName.isEmpty
-          ? WelcomeScreen(onStart: (name) async {
-              final prefs = await SharedPreferences.getInstance();
-              prefs.setString('user_name', name);
-              Navigator.pushReplacement(context, MaterialPageRoute(
-                builder: (_) => HomeScreen(userName: name, theme: _theme, onThemeChange: _updateTheme),
-              ));
-            })
+          ? WelcomeScreen(
+              onStart: (name) async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setString('user_name', name);
+                setState(() {});
+              },
+            )
           : HomeScreen(userName: widget.userName, theme: _theme, onThemeChange: _updateTheme),
     );
   }
