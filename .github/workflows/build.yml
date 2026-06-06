@@ -14,10 +14,10 @@ jobs:
         with:
           flutter-version: '3.19.0'
       
-      - name: Create Flutter project
+      - name: Create Flutter project and build
         run: |
           flutter create --project-name gradesnap tmp_project
-          cp -r lib/* tmp_project/lib/
+          cp lib/*.dart tmp_project/lib/
           cp pubspec.yaml tmp_project/pubspec.yaml
           cd tmp_project
           flutter pub get
